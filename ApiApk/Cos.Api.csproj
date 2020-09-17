@@ -126,6 +126,13 @@
     <Compile Include="Classes\Startup.cs" />
     <Compile Include="Controller\CargoController.cs" />
     <Compile Include="Controller\ClienteController.cs" />
+    <Compile Include="Controller\OrcamentoController.cs" />
+    <Compile Include="Controller\OrdemDeServicoController.cs" />
+    <Compile Include="Controller\PagamentoController.cs" />
+    <Compile Include="Controller\PecaController.cs" />
+    <Compile Include="Controller\ServicoController.cs" />
+    <Compile Include="Controller\StatusController.cs" />
+    <Compile Include="Controller\TipoPagamentoController.cs" />
     <Compile Include="Controller\UsuarioController.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

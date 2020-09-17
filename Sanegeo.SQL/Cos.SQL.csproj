@@ -77,6 +77,14 @@
       <DependentUpon>SanegeoModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RepositorioCliente.cs" />
+    <Compile Include="RepositorioOrcamento.cs" />
+    <Compile Include="RepositorioOrdemDeServico.cs" />
+    <Compile Include="RepositorioPagamento.cs" />
+    <Compile Include="RepositorioPeca.cs" />
+    <Compile Include="RepositorioServico.cs" />
+    <Compile Include="RepositorioTipoPagamento.cs" />
+    <Compile Include="RepositorioUsuario.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
@@ -88,6 +96,7 @@
       <DependentUpon>SanegeoModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
+    <Compile Include="RepositorioCargo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

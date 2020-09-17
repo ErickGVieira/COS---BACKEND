@@ -76,6 +76,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RepositorioStatus.cs" />
+    <Compile Include="ServicoCargo.cs" />
+    <Compile Include="ServicoCliente.cs" />
+    <Compile Include="ServicoOrcamento.cs" />
+    <Compile Include="ServicoOrdemDeServico.cs" />
+    <Compile Include="ServicoPagamento.cs" />
+    <Compile Include="ServicoPeca.cs" />
+    <Compile Include="ServicoServico.cs" />
+    <Compile Include="ServicoStatus.cs" />
+    <Compile Include="ServicoTipoPagamento.cs" />
+    <Compile Include="ServicoUsuario.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Sanegeo.Dominio\Cos.Dominio.csproj">
