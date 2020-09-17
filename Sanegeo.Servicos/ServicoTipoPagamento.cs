@@ -1,4 +1,5 @@
-﻿using Cos.Dominio.Repositorios.SQL;
+﻿using Cos.Dominio.Modelos;
+using Cos.Dominio.Repositorios.SQL;
 using Sanegeo.SQL;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,18 @@ namespace Sanegeo.Servicos
         public ServicoTipoPagamento()
         {
             this.repositorioTipoPagamento = new RepositorioTipoPagamento();
+        }
+
+        public TipoPagamentoDTO ObtemTipoPagamento(int idTipoPagamento)
+        {
+            try
+            {
+                return repositorioTipoPagamento.ObtemTipoPagamento(idTipoPagamento);
+            }
+            catch (Exception ex)
+            {
+                return new TipoPagamentoDTO();
+            }
         }
     }
 }

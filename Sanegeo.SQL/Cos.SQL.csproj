@@ -83,6 +83,7 @@
     <Compile Include="RepositorioPagamento.cs" />
     <Compile Include="RepositorioPeca.cs" />
     <Compile Include="RepositorioServico.cs" />
+    <Compile Include="RepositorioStatus.cs" />
     <Compile Include="RepositorioTipoPagamento.cs" />
     <Compile Include="RepositorioUsuario.cs" />
   </ItemGroup>

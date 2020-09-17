@@ -1,4 +1,5 @@
-﻿using Cos.Dominio.Repositorios.SQL;
+﻿using Cos.Dominio.Modelos;
+using Cos.Dominio.Repositorios.SQL;
 using Sanegeo.SQL;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,18 @@ namespace Sanegeo.Servicos
         public ServicoOrcamento()
         {
             this.repositorioOrcamento = new RepositorioOrcamento();
+        }
+
+        public OrcamentoDTO ObtemOrcamento(int idOrcamento)
+        {
+            try
+            {
+                return repositorioOrcamento.ObtemOrcamento(idOrcamento);
+            }
+            catch (Exception ex)
+            {
+                return new OrcamentoDTO();
+            }
         }
     }
 }

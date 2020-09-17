@@ -10,13 +10,13 @@ using System.Threading.Tasks;
 
 namespace Sanegeo.SQL
 {
-    public class RepositorioPeca: IRepositorioPeca
+    public class RepositorioStatus: IRepositorioStatus
     {
-        public PecaDTO ObtemPeca(int idPeca)
+        public StatusDTO ObtemStatus(int idStatus)
         {
             using (SanegeoEntities context = new SanegeoEntities())
             {
-                return Mapper.Map<PecaDTO>(context.Peca.FirstOrDefault(x => x.id == idPeca));
+                return Mapper.Map<StatusDTO>(context.Status.FirstOrDefault(x => x.id == idStatus));
             }
         }
     }

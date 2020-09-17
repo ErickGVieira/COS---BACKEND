@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Cos.Dominio.Modelos;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,6 @@ namespace Cos.Dominio.Repositorios.SQL
 {
     public interface IRepositorioStatus
     {
+        StatusDTO ObtemStatus(int idStatus);
     }
 }

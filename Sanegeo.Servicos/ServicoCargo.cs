@@ -1,4 +1,5 @@
-﻿using Cos.Dominio.Repositorios.SQL;
+﻿using Cos.Dominio.Modelos;
+using Cos.Dominio.Repositorios.SQL;
 using Sanegeo.SQL;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,18 @@ namespace Sanegeo.Servicos
         public ServicoCargo()
         {
             this.repositorioCargo = new RepositorioCargo();
+        }
+
+        public CargoDTO ObtemCargo(int idCargo)
+        {
+            try
+            {
+                return repositorioCargo.ObtemCargo(idCargo);
+            }
+            catch (Exception ex)
+            {
+                return new CargoDTO();
+            }
         }
     }
 }
