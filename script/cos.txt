@@ -1,0 +1,221 @@
+﻿-- 1
+CREATE TABLE Status(
+        [id] [int] IDENTITY(1,1) NOT NULL,
+        [descricao] [varchar](50) NOT NULL,
+ CONSTRAINT [PK_Status] PRIMARY KEY CLUSTERED 
+(
+        [id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+
+-- 2
+CREATE TABLE Servico(
+        [id] [int] IDENTITY(1,1) NOT NULL,
+        [descricao] [varchar](50) NULL,
+ CONSTRAINT [PK_Servico] PRIMARY KEY CLUSTERED 
+(
+        [id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+
+-- 3
+CREATE TABLE Cargo(
+        [id] [int] IDENTITY(1,1) NOT NULL,
+        [descricao] [varchar](50) NULL,
+ CONSTRAINT [PK_Cargo] PRIMARY KEY CLUSTERED 
+(
+        [id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+
+-- 4
+CREATE TABLE Usuario(
+        [id] [int] IDENTITY(1,1) NOT NULL,
+        [nome] [varchar](50) NULL,
+        [cpf] [varchar](50) NULL,
+        [senha] [varchar](50) NULL,
+        [idCargo] [int] NOT NULL,
+ CONSTRAINT [PK_Usuario] PRIMARY KEY CLUSTERED 
+(
+        [id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+
+ALTER TABLE [dbo].Usuario  WITH CHECK ADD  CONSTRAINT [FK_usuario_cargo] FOREIGN KEY(idCargo)
+REFERENCES [dbo].Cargo ([id])
+GO
+
+
+-- 5
+CREATE TABLE TipoPagamento(
+        [id] [int] IDENTITY(1,1) NOT NULL,
+        [descricao] [varchar](50) NULL,
+ CONSTRAINT [PK_TipoPagamento] PRIMARY KEY CLUSTERED 
+(
+        [id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+
+-- 6
+CREATE TABLE Peca(
+        [id] [int] NOT NULL,
+        [descricao] [varchar](50) NULL,
+ CONSTRAINT [PK_Peca] PRIMARY KEY CLUSTERED 
+(
+        [id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+
+-- 7
+CREATE TABLE Cliente(
+        [id] [int] NOT NULL,
+        [nome] [varchar](50) NULL,
+        [cpf] [varchar](50) NULL,
+        [telefone] [varchar](50) NULL,
+        [email] [varchar](50) NULL,
+ CONSTRAINT [PK_Cliente] PRIMARY KEY CLUSTERED 
+(
+        [id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+
+-- 8
+CREATE TABLE OrdemDeServico(
+        [id] [int] IDENTITY(1,1) NOT NULL,
+        [idCliente] [int] NOT NULL,
+        [idServicoSolicitado] [int] NOT NULL,
+        [idServicoExecutado] [int] NOT NULL,
+        [idStatus] [int] NOT NULL,
+        [dataInicio] [date] NOT NULL,
+        [dataFim] [date] NULL,
+        [idSolicitante] [int] NOT NULL,
+        [idExecutor] [int] NULL,
+ CONSTRAINT [PK_OrdemDeServico] PRIMARY KEY CLUSTERED 
+(
+        [id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+
+ALTER TABLE [dbo].[OrdemDeServico]  WITH CHECK ADD  CONSTRAINT [FK_ordem_servico_cliente] FOREIGN KEY([idCliente])
+REFERENCES [dbo].[Cliente] ([id])
+GO
+
+
+ALTER TABLE [dbo].[OrdemDeServico] CHECK CONSTRAINT [FK_ordem_servico_cliente]
+GO
+
+
+ALTER TABLE [dbo].[OrdemDeServico]  WITH CHECK ADD  CONSTRAINT [FK_ordem_servico_executado] FOREIGN KEY([idServicoExecutado])
+REFERENCES [dbo].[Servico] ([id])
+GO
+
+
+ALTER TABLE [dbo].[OrdemDeServico] CHECK CONSTRAINT [FK_ordem_servico_executado]
+GO
+
+
+ALTER TABLE [dbo].[OrdemDeServico]  WITH CHECK ADD  CONSTRAINT [FK_ordem_servico_executor] FOREIGN KEY([idExecutor])
+REFERENCES [dbo].[Usuario] ([id])
+GO
+
+
+ALTER TABLE [dbo].[OrdemDeServico] CHECK CONSTRAINT [FK_ordem_servico_executor]
+GO
+
+
+ALTER TABLE [dbo].[OrdemDeServico]  WITH CHECK ADD  CONSTRAINT [FK_ordem_servico_solicitado] FOREIGN KEY([idServicoSolicitado])
+REFERENCES [dbo].[Servico] ([id])
+GO
+
+
+ALTER TABLE [dbo].[OrdemDeServico] CHECK CONSTRAINT [FK_ordem_servico_solicitado]
+GO
+
+
+ALTER TABLE [dbo].[OrdemDeServico]  WITH CHECK ADD  CONSTRAINT [FK_ordem_servico_solicitante] FOREIGN KEY([idSolicitante])
+REFERENCES [dbo].[Usuario] ([id])
+GO
+
+
+ALTER TABLE [dbo].[OrdemDeServico] CHECK CONSTRAINT [FK_ordem_servico_solicitante]
+GO
+
+
+ALTER TABLE [dbo].[OrdemDeServico]  WITH CHECK ADD  CONSTRAINT [FK_ordem_servico_status] FOREIGN KEY([idStatus])
+REFERENCES [dbo].[Status] ([id])
+GO
+
+
+ALTER TABLE [dbo].[OrdemDeServico] CHECK CONSTRAINT [FK_ordem_servico_status]
+GO
+
+
+-- 9
+CREATE TABLE Orcamento(
+        [id] [int] IDENTITY(1,1) NOT NULL,
+        [idOrdemServico] [int] NOT NULL,
+        [valor] [numeric](18, 0) NOT NULL,
+        [descricao] [varchar](255) NULL,
+ CONSTRAINT [PK_Orcamento] PRIMARY KEY CLUSTERED 
+(
+        [id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+
+ALTER TABLE [dbo].[Orcamento]  WITH CHECK ADD  CONSTRAINT [FK_orcamento_ordem_servico] FOREIGN KEY([idOrdemServico])
+REFERENCES [dbo].[OrdemDeServico] ([id])
+GO
+
+
+ALTER TABLE [dbo].[Orcamento] CHECK CONSTRAINT [FK_orcamento_ordem_servico]
+GO
+
+
+-- 10
+CREATE TABLE Pagamento(
+        [id] [int] IDENTITY(1,1) NOT NULL,
+        [valor] [numeric](18, 0) NOT NULL,
+        [idOrdemServico] [int] NOT NULL,
+        [idTipoPagamento] [int] NOT NULL,
+ CONSTRAINT [PK_Pagamento] PRIMARY KEY CLUSTERED 
+(
+        [id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+
+ALTER TABLE [dbo].[Pagamento]  WITH CHECK ADD  CONSTRAINT [FK_pagamento_ordem_servico] FOREIGN KEY([idOrdemServico])
+REFERENCES [dbo].[OrdemDeServico] ([id])
+GO
+
+
+ALTER TABLE [dbo].[Pagamento] CHECK CONSTRAINT [FK_pagamento_ordem_servico]
+GO
+
+
+ALTER TABLE [dbo].[Pagamento]  WITH CHECK ADD  CONSTRAINT [FK_pagamento_tipo] FOREIGN KEY([idTipoPagamento])
+REFERENCES [dbo].[TipoPagamento] ([id])
+GO
+
+
+ALTER TABLE [dbo].[Pagamento] CHECK CONSTRAINT [FK_pagamento_tipo]
+GO
