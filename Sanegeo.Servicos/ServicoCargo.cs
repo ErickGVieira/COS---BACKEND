@@ -29,5 +29,53 @@ namespace Sanegeo.Servicos
                 return new CargoDTO();
             }
         }
+
+        public List<CargoDTO> ObtemCargos()
+        {
+            try
+            {
+                return repositorioCargo.ObtemCargos();
+            }
+            catch (Exception ex)
+            {
+                return new List<CargoDTO>();
+            }
+        }
+
+        public bool CriaCargo(CargoDTO cargoDTO)
+        {
+            try
+            {
+                return repositorioCargo.CriaCargo(cargoDTO);
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public bool RemoveCargo(int idCargo)
+        {
+            try
+            {
+                return repositorioCargo.RemoveCargo(idCargo);
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public CargoDTO AtualizaCargo(CargoDTO cargoDTO)
+        {
+            try
+            {
+                return repositorioCargo.AtualizaCargo(cargoDTO);
+            }
+            catch (Exception ex)
+            {
+                return new CargoDTO();
+            }
+        }
     }
 }

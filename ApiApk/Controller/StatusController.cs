@@ -12,9 +12,16 @@ namespace ApiApk.Controller
     {
         [HttpGet]
         [ActionName("obtem")]
-        public StatusDTO Obter(int idOrdemDeServico)
+        public StatusDTO Obter(int idStatus)
         {
             return new StatusDTO();
+        }
+
+        [HttpGet]
+        [ActionName("obtemTodos")]
+        public List<StatusDTO> ObterTodos()
+        {
+            return new List<StatusDTO>();
         }
 
         [HttpPost]

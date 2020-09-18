@@ -10,5 +10,9 @@ namespace Cos.Dominio.Repositorios.SQL
     public interface IRepositorioPeca
     {
         PecaDTO ObtemPeca(int idPeca);
+        List<PecaDTO> ObtemPecas();
+        bool RemovePeca(int idPeca);
+        PecaDTO AtualizaPeca(PecaDTO pecaDTO);
+        bool CriaPeca(PecaDTO pecaDTO);
     }
 }

@@ -10,5 +10,10 @@ namespace Cos.Dominio.Repositorios.SQL
     public interface IRepositorioUsuario
     {
         UsuarioDTO ObtemUsuario(int idUsuario);
+        List<UsuarioDTO> ObtemUsuarios();
+        bool RemoveUsuario(int idUsuario);
+        bool CriaUsuario(UsuarioDTO usuarioDTO);
+        UsuarioDTO AtualizaUsuario(UsuarioDTO usuarioDTO);
+        UsuarioDTO Login(string cpf, string senha);
     }
 }

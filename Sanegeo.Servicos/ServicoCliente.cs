@@ -29,5 +29,53 @@ namespace Sanegeo.Servicos
                 return new ClienteDTO();
             }
         }
+
+        public List<ClienteDTO> ObtemClientes()
+        {
+            try
+            {
+                return repositorioCliente.ObtemClientes();
+            }
+            catch (Exception ex)
+            {
+                return new List<ClienteDTO>();
+            }
+        }
+
+        public bool CriaCliente(ClienteDTO clienteDTO)
+        {
+            try
+            {
+                return repositorioCliente.CriaCliente(clienteDTO);
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public ClienteDTO AtualizaCliente(ClienteDTO clienteDTO)
+        {
+            try
+            {
+                return repositorioCliente.AtualizaCliente(clienteDTO);
+            }
+            catch (Exception ex)
+            {
+                return new ClienteDTO();
+            }
+        }
+
+        public bool RemoveCliente(int idCliente)
+        {
+            try
+            {
+                return repositorioCliente.RemoveCliente(idCliente);
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
     }
 }

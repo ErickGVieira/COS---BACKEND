@@ -12,9 +12,16 @@ namespace ApiApk.Controller
     {
         [HttpGet]
         [ActionName("obtem")]
-        public PecaDTO Obter(int idOrdemDeServico)
+        public PecaDTO Obter(int idPeca)
         {
             return new PecaDTO();
+        }
+
+        [HttpGet]
+        [ActionName("obtemTodos")]
+        public List<PecaDTO> ObterTodos()
+        {
+            return new List<PecaDTO>();
         }
 
         [HttpPost]

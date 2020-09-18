@@ -10,5 +10,9 @@ namespace Cos.Dominio.Repositorios.SQL
     public interface IRepositorioOrdemDeServico
     {
         OrdemDeServicoDTO ObtemOrdemDeServico(int idOrdemDeServico);
+        List<OrdemDeServicoDTO> ObtemOrdensDeServico();
+        bool RemoveOrdemDeServico(int idOrdemDeServico);
+        bool CriaOrdemDeServio(OrdemDeServicoDTO ordemDeServicoDTO);
+        OrdemDeServicoDTO AtualizaOrdemDeServico(OrdemDeServicoDTO ordemDeServicoDTO);
     }
 }

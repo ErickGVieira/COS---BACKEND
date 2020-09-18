@@ -10,5 +10,9 @@ namespace Cos.Dominio.Repositorios.SQL
     public interface IRepositorioCargo
     {
         CargoDTO ObtemCargo(int idCargo);
+        List<CargoDTO> ObtemCargos();
+        bool RemoveCargo(int idCargo);
+        bool CriaCargo(CargoDTO cargoDTO);
+        CargoDTO AtualizaCargo(CargoDTO cargoDTO);
     }
 }

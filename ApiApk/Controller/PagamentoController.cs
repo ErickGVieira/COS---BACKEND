@@ -12,9 +12,16 @@ namespace ApiApk.Controller
     {
         [HttpGet]
         [ActionName("obtem")]
-        public PagamentoDTO Obter(int idOrdemDeServico)
+        public PagamentoDTO Obter(int idPagamento)
         {
             return new PagamentoDTO();
+        }
+
+        [HttpGet]
+        [ActionName("obtemTodos")]
+        public List<PagamentoDTO> ObterTodos()
+        {
+            return new List<PagamentoDTO>();
         }
 
         [HttpPost]

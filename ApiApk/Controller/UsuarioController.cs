@@ -21,6 +21,13 @@ namespace Cos.Api.Controller
         {
             return new UsuarioDTO();
         }
+        
+        [HttpGet]
+        [ActionName("obtemTodos")]
+        public List<UsuarioDTO> ObterTodos()
+        {
+            return new List<UsuarioDTO>();
+        }
 
         [HttpPost]
         [ActionName("cria")]

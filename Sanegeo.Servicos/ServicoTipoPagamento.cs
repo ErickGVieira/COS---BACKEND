@@ -29,5 +29,53 @@ namespace Sanegeo.Servicos
                 return new TipoPagamentoDTO();
             }
         }
+
+        public List<TipoPagamentoDTO> ObtemTiposPagamento()
+        {
+            try
+            {
+                return repositorioTipoPagamento.ObtemTiposPagamento();
+            }
+            catch (Exception ex)
+            {
+                return new List<TipoPagamentoDTO>();
+            }
+        }
+
+        public bool CriarTipoPagamento(TipoPagamentoDTO tipoPagamentoDTO)
+        {
+            try
+            {
+                return repositorioTipoPagamento.CriaTipoPagamento(tipoPagamentoDTO);
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+        
+        public bool RemoverTipoPagamento(int idTipoPagamento)
+        {
+            try
+            {
+                return repositorioTipoPagamento.RemoveTipoPagamento(idTipoPagamento);
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public TipoPagamentoDTO AtualizarTipoPagamento(TipoPagamentoDTO tipoPagamentoDTO)
+        {
+            try
+            {
+                return repositorioTipoPagamento.AtualizaTipoPagamento(tipoPagamentoDTO);
+            }
+            catch (Exception ex)
+            {
+                return new TipoPagamentoDTO();
+            }
+        }
     }
 }

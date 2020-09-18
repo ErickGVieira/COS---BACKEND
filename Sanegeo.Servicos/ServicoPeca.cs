@@ -29,5 +29,53 @@ namespace Sanegeo.Servicos
                 return new PecaDTO();
             }
         }
+
+        public List<PecaDTO> ObtemPecas()
+        {
+            try
+            {
+                return repositorioPeca.ObtemPecas();
+            }
+            catch (Exception ex)
+            {
+                return new List<PecaDTO>();
+            }
+        }
+
+        public bool CriarPeca(PecaDTO pecaDTO)
+        {
+            try
+            {
+                return repositorioPeca.CriaPeca(pecaDTO);
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public PecaDTO AtualizarPeca(PecaDTO pecaDTO)
+        {
+            try
+            {
+                return repositorioPeca.AtualizaPeca(pecaDTO);
+            }
+            catch (Exception ex)
+            {
+                return new PecaDTO();
+            }
+        }
+
+        public bool RemoverPeca(int idPeca)
+        {
+            try
+            {
+                return repositorioPeca.RemovePeca(idPeca);
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
     }
 }

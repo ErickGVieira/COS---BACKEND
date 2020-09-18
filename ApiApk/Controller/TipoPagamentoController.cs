@@ -17,6 +17,13 @@ namespace ApiApk.Controller
             return new TipoPagamentoDTO();
         }
 
+        [HttpGet]
+        [ActionName("obtemTodos")]
+        public List<TipoPagamentoDTO> ObterTodos()
+        {
+            return new List<TipoPagamentoDTO>();
+        }
+
         [HttpPost]
         [ActionName("cria")]
         public bool Cria()

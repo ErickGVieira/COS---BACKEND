@@ -17,6 +17,13 @@ namespace ApiApk.Controller
             return new ClienteDTO();
         }
 
+        [HttpGet]
+        [ActionName("obtemTodos")]
+        public List<ClienteDTO> ObterTodos()
+        {
+            return new List<ClienteDTO>();
+        }
+
         [HttpPost]
         [ActionName("cria")]
         public bool Cria()

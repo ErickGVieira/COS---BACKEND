@@ -17,6 +17,13 @@ namespace ApiApk.Controller
             return new CargoDTO();
         }
 
+        [HttpGet]
+        [ActionName("obtemTodos")]
+        public List<CargoDTO> ObterTodos()
+        {
+            return new List<CargoDTO>();
+        }
+
         [HttpPost]
         [ActionName("cria")]
         public bool Cria()

@@ -17,6 +17,13 @@ namespace ApiApk.Controller
             return new OrcamentoDTO();
         }
 
+        [HttpGet]
+        [ActionName("obtemTodos")]
+        public List<OrcamentoDTO> ObterTodos()
+        {
+            return new List<OrcamentoDTO>();
+        }
+
         [HttpPost]
         [ActionName("cria")]
         public bool Cria()
