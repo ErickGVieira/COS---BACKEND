@@ -1,4 +1,5 @@
 ﻿using Cos.Dominio.Modelos;
+using Sanegeo.Servicos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,37 +13,37 @@ namespace ApiApk.Controller
     {
         [HttpGet]
         [ActionName("obtem")]
-        public TipoPagamentoDTO Obter(int idOrdemDeServico)
+        public TipoPagamentoDTO Obter(int idTipoPagamento)
         {
-            return new TipoPagamentoDTO();
+            return new ServicoTipoPagamento().ObtemTipoPagamento(idTipoPagamento);
         }
 
         [HttpGet]
         [ActionName("obtemTodos")]
         public List<TipoPagamentoDTO> ObterTodos()
         {
-            return new List<TipoPagamentoDTO>();
+            return new ServicoTipoPagamento().ObtemTiposPagamento();
         }
 
         [HttpPost]
         [ActionName("cria")]
-        public bool Cria()
+        public bool Cria(TipoPagamentoDTO tipoPagamentoDTO)
         {
-            return true;
+            return new ServicoTipoPagamento().CriarTipoPagamento(tipoPagamentoDTO);
         }
 
         [HttpPut]
         [ActionName("atualiza")]
-        public TipoPagamentoDTO Atualiza()
+        public TipoPagamentoDTO Atualiza(TipoPagamentoDTO tipoPagamentoDTO)
         {
-            return new TipoPagamentoDTO();
+            return new ServicoTipoPagamento().AtualizarTipoPagamento(tipoPagamentoDTO);
         }
 
         [HttpDelete]
         [ActionName("remove")]
-        public bool Remove()
+        public bool Remove(int idTipoPagamento)
         {
-            return true;
+            return new ServicoTipoPagamento().RemoverTipoPagamento(idTipoPagamento);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Cos.Dominio.Modelos;
+using Sanegeo.Servicos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,35 +15,35 @@ namespace ApiApk.Controller
         [ActionName("obtem")]
         public PecaDTO Obter(int idPeca)
         {
-            return new PecaDTO();
+            return new ServicoPeca().ObtemPeca(idPeca);
         }
 
         [HttpGet]
         [ActionName("obtemTodos")]
         public List<PecaDTO> ObterTodos()
         {
-            return new List<PecaDTO>();
+            return new ServicoPeca().ObtemPecas();
         }
 
         [HttpPost]
         [ActionName("cria")]
-        public bool Cria()
+        public bool Cria(PecaDTO pecaDTO)
         {
-            return true;
+            return new ServicoPeca().CriarPeca(pecaDTO);
         }
 
         [HttpPut]
         [ActionName("atualiza")]
-        public PecaDTO Atualiza()
+        public PecaDTO Atualiza(PecaDTO pecaDTO)
         {
-            return new PecaDTO();
+            return new ServicoPeca().AtualizarPeca(pecaDTO);
         }
 
         [HttpDelete]
         [ActionName("remove")]
-        public bool Remove()
+        public bool Remove(int idPeca)
         {
-            return true;
+            return new ServicoPeca().RemoverPeca(idPeca);
         }
     }
 }

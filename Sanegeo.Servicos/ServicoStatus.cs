@@ -18,7 +18,7 @@ namespace Sanegeo.Servicos
             this.repositorioStatus = new RepositorioStatus();
         }
 
-        public StatusDTO ObtemStatu(int idStatus)
+        public StatusDTO ObtemStatus(int idStatus)
         {
             try
             {

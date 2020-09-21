@@ -1,4 +1,5 @@
 ﻿using Cos.Dominio.Modelos;
+using Sanegeo.Servicos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,35 +15,35 @@ namespace ApiApk.Controller
         [ActionName("obtem")]
         public ClienteDTO Obter(int idCliente)
         {
-            return new ClienteDTO();
+            return new ServicoCliente().ObtemCliente(idCliente);
         }
 
         [HttpGet]
         [ActionName("obtemTodos")]
         public List<ClienteDTO> ObterTodos()
         {
-            return new List<ClienteDTO>();
+            return new ServicoCliente().ObtemClientes();
         }
 
         [HttpPost]
         [ActionName("cria")]
-        public bool Cria()
+        public bool Cria(ClienteDTO clienteDTO)
         {
-            return true;
+            return new ServicoCliente().CriaCliente(clienteDTO);
         }
 
         [HttpPut]
         [ActionName("atualiza")]
-        public ClienteDTO Atualiza()
+        public ClienteDTO Atualiza(ClienteDTO clienteDTO)
         {
-            return new ClienteDTO();
+            return new ServicoCliente().AtualizaCliente(clienteDTO);
         }
 
         [HttpDelete]
         [ActionName("remove")]
-        public bool Remove()
+        public bool Remove(int idCliente)
         {
-            return true;
+            return new ServicoCliente().RemoveCliente(idCliente);
         }
     }
 }

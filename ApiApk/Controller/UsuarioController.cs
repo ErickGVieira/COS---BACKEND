@@ -1,4 +1,5 @@
 ﻿using Cos.Dominio.Modelos;
+using Sanegeo.Servicos;
 using System;
 using System.Collections.Generic;
 using System.Web.Http;
@@ -12,42 +13,42 @@ namespace Cos.Api.Controller
         [ActionName("login")]
         public UsuarioDTO Login(string usuario, string senha)
         {
-            return new UsuarioDTO();
+            return new ServicoUsuario().Login(usuario, senha);
         }
 
         [HttpGet]
         [ActionName("obtem")]
         public UsuarioDTO Obter(int idUsuario)
         {
-            return new UsuarioDTO();
+            return new ServicoUsuario().ObtemUsuario(idUsuario);
         }
         
         [HttpGet]
         [ActionName("obtemTodos")]
         public List<UsuarioDTO> ObterTodos()
         {
-            return new List<UsuarioDTO>();
+            return new ServicoUsuario().ObtemUsuarios();
         }
 
         [HttpPost]
         [ActionName("cria")]
-        public bool Cria()
+        public bool Cria(UsuarioDTO usuario)
         {
-            return true;
+            return new ServicoUsuario().CriaUsuario(usuario);
         }
 
         [HttpPut]
         [ActionName("atualiza")]
-        public UsuarioDTO Atualiza()
+        public UsuarioDTO Atualiza(UsuarioDTO usuario)
         {
-            return new UsuarioDTO();
+            return new ServicoUsuario().AtualizarUsuario(usuario);
         }
 
         [HttpDelete]
         [ActionName("remove")]
-        public bool Remove()
+        public bool Remove(int idUsuario)
         {
-            return true;
+            return new ServicoUsuario().RemoveUsuario(idUsuario);
         }
     }
 }
