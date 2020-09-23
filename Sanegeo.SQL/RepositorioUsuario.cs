@@ -97,7 +97,6 @@ namespace Sanegeo.SQL
                 {
                     return new UsuarioDTO();
                 }
-
             }
         }
     }

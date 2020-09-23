@@ -219,3 +219,6 @@ GO
 
 ALTER TABLE [dbo].[Pagamento] CHECK CONSTRAINT [FK_pagamento_tipo]
 GO
+
+insert into Cargo (descricao) values ('Recepcionista'), ('Mecanico'), ('Gerente');
+insert into Usuario (nome, cpf, senha, idCargo) values ('Erick', '1', '123', 1);

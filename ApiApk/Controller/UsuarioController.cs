@@ -11,9 +11,9 @@ namespace Cos.Api.Controller
     {
         [HttpGet]
         [ActionName("login")]
-        public UsuarioDTO Login(string usuario, string senha)
+        public UsuarioDTO Login(string cpf, string senha)
         {
-            return new ServicoUsuario().Login(usuario, senha);
+            return new ServicoUsuario().Login(cpf, senha);
         }
 
         [HttpGet]
