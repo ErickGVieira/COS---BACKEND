@@ -56,6 +56,7 @@ namespace Sanegeo.SQL
                 try
                 {
                     var ordemDeServico = Mapper.Map<OrdemDeServico>(ordemDeServicoDTO);
+                    ordemDeServico.dataInicio = DateTime.Now;
                     context.OrdemDeServico.Add(ordemDeServico);
                     context.SaveChanges();
                     return true;
