@@ -9,7 +9,7 @@
 
 namespace Sanegeo.SQL.Modelo
 {
-    using Cos.Dominio;
+    using Sanegeo.Dominio;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
@@ -26,15 +26,7 @@ namespace Sanegeo.SQL.Modelo
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Cargo> Cargo { get; set; }
-        public virtual DbSet<Cliente> Cliente { get; set; }
-        public virtual DbSet<Orcamento> Orcamento { get; set; }
-        public virtual DbSet<OrdemDeServico> OrdemDeServico { get; set; }
-        public virtual DbSet<Pagamento> Pagamento { get; set; }
-        public virtual DbSet<Peca> Peca { get; set; }
-        public virtual DbSet<Servico> Servico { get; set; }
-        public virtual DbSet<Status> Status { get; set; }
-        public virtual DbSet<TipoPagamento> TipoPagamento { get; set; }
-        public virtual DbSet<Usuario> Usuario { get; set; }
+        public virtual DbSet<Aeronave> Aeronaves { get; set; }
+        public virtual DbSet<Modelo> Modeloes { get; set; }
     }
 }

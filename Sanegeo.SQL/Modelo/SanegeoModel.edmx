@@ -5,648 +5,89 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="SanegeoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="Cargo">
+        <EntityType Name="Aeronave">
           <Key>
-            <PropertyRef Name="id" />
+            <PropertyRef Name="ID" />
           </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="descricao" Type="varchar" MaxLength="50" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PREFIX" Type="nchar" MaxLength="6" Nullable="false" />
+          <Property Name="MAX_DEPARTURE_WEIGHT" Type="decimal" Precision="3" Scale="0" Nullable="false" />
+          <Property Name="MAX_LANDING_WEIGHT" Type="decimal" Precision="3" Scale="0" Nullable="false" />
+          <Property Name="ACTIVE" Type="bit" Nullable="false" />
+          <Property Name="AIRCRAFT_MODEL" Type="nchar" MaxLength="4" />
+          <Property Name="PASSENGERS_COUNT_AIRCRAFT" Type="int" />
         </EntityType>
-        <EntityType Name="Cliente">
+        <EntityType Name="Modelo">
           <Key>
-            <PropertyRef Name="id" />
+            <PropertyRef Name="ID" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
-          <Property Name="nome" Type="varchar" MaxLength="50" />
-          <Property Name="cpf" Type="varchar" MaxLength="50" />
-          <Property Name="telefone" Type="varchar" MaxLength="50" />
-          <Property Name="email" Type="varchar" MaxLength="50" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CODE" Type="nchar" MaxLength="4" Nullable="false" />
+          <Property Name="ALTERNATIVE_CODE" Type="nchar" MaxLength="4" />
+          <Property Name="MAX_DEPARTURE_WEIGHT" Type="decimal" Precision="3" Scale="0" Nullable="false" />
+          <Property Name="MAX_LANDING_WEIGHT" Type="decimal" Precision="3" Scale="0" />
         </EntityType>
-        <EntityType Name="Orcamento">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="idOrdemServico" Type="int" Nullable="false" />
-          <Property Name="valor" Type="numeric" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="descricao" Type="varchar" MaxLength="255" />
-        </EntityType>
-        <EntityType Name="OrdemDeServico">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="idCliente" Type="int" Nullable="false" />
-          <Property Name="idServicoSolicitado" Type="int" Nullable="false" />
-          <Property Name="idServicoExecutado" Type="int" Nullable="false" />
-          <Property Name="idStatus" Type="int" Nullable="false" />
-          <Property Name="dataInicio" Type="date" Nullable="false" />
-          <Property Name="dataFim" Type="date" />
-          <Property Name="idSolicitante" Type="int" Nullable="false" />
-          <Property Name="idExecutor" Type="int" />
-        </EntityType>
-        <EntityType Name="Pagamento">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="valor" Type="numeric" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="idOrdemServico" Type="int" Nullable="false" />
-          <Property Name="idTipoPagamento" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Peca">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" Nullable="false" />
-          <Property Name="descricao" Type="varchar" MaxLength="50" />
-        </EntityType>
-        <EntityType Name="Servico">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="descricao" Type="varchar" MaxLength="50" />
-        </EntityType>
-        <EntityType Name="Status">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="descricao" Type="varchar" MaxLength="50" Nullable="false" />
-        </EntityType>
-        <EntityType Name="TipoPagamento">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="descricao" Type="varchar" MaxLength="50" />
-        </EntityType>
-        <EntityType Name="Usuario">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="nome" Type="varchar" MaxLength="50" />
-          <Property Name="cpf" Type="varchar" MaxLength="50" />
-          <Property Name="senha" Type="varchar" MaxLength="50" />
-          <Property Name="idCargo" Type="int" Nullable="false" />
-        </EntityType>
-        <Association Name="FK_orcamento_ordem_servico">
-          <End Role="OrdemDeServico" Type="Self.OrdemDeServico" Multiplicity="1" />
-          <End Role="Orcamento" Type="Self.Orcamento" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="OrdemDeServico">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Orcamento">
-              <PropertyRef Name="idOrdemServico" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ordem_servico_cliente">
-          <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
-          <End Role="OrdemDeServico" Type="Self.OrdemDeServico" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cliente">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="OrdemDeServico">
-              <PropertyRef Name="idCliente" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ordem_servico_executado">
-          <End Role="Servico" Type="Self.Servico" Multiplicity="1" />
-          <End Role="OrdemDeServico" Type="Self.OrdemDeServico" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Servico">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="OrdemDeServico">
-              <PropertyRef Name="idServicoExecutado" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ordem_servico_executor">
-          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
-          <End Role="OrdemDeServico" Type="Self.OrdemDeServico" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Usuario">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="OrdemDeServico">
-              <PropertyRef Name="idExecutor" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ordem_servico_solicitado">
-          <End Role="Servico" Type="Self.Servico" Multiplicity="1" />
-          <End Role="OrdemDeServico" Type="Self.OrdemDeServico" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Servico">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="OrdemDeServico">
-              <PropertyRef Name="idServicoSolicitado" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ordem_servico_solicitante">
-          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
-          <End Role="OrdemDeServico" Type="Self.OrdemDeServico" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Usuario">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="OrdemDeServico">
-              <PropertyRef Name="idSolicitante" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ordem_servico_status">
-          <End Role="Status" Type="Self.Status" Multiplicity="1" />
-          <End Role="OrdemDeServico" Type="Self.OrdemDeServico" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Status">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="OrdemDeServico">
-              <PropertyRef Name="idStatus" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_pagamento_ordem_servico">
-          <End Role="OrdemDeServico" Type="Self.OrdemDeServico" Multiplicity="1" />
-          <End Role="Pagamento" Type="Self.Pagamento" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="OrdemDeServico">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Pagamento">
-              <PropertyRef Name="idOrdemServico" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_pagamento_tipo">
-          <End Role="TipoPagamento" Type="Self.TipoPagamento" Multiplicity="1" />
-          <End Role="Pagamento" Type="Self.Pagamento" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TipoPagamento">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Pagamento">
-              <PropertyRef Name="idTipoPagamento" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_usuario_cargo">
-          <End Role="Cargo" Type="Self.Cargo" Multiplicity="1" />
-          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cargo">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Usuario">
-              <PropertyRef Name="idCargo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="SanegeoModelStoreContainer">
-          <EntitySet Name="Cargo" EntityType="Self.Cargo" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Orcamento" EntityType="Self.Orcamento" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="OrdemDeServico" EntityType="Self.OrdemDeServico" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Pagamento" EntityType="Self.Pagamento" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Peca" EntityType="Self.Peca" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Servico" EntityType="Self.Servico" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="TipoPagamento" EntityType="Self.TipoPagamento" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_orcamento_ordem_servico" Association="Self.FK_orcamento_ordem_servico">
-            <End Role="OrdemDeServico" EntitySet="OrdemDeServico" />
-            <End Role="Orcamento" EntitySet="Orcamento" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ordem_servico_cliente" Association="Self.FK_ordem_servico_cliente">
-            <End Role="Cliente" EntitySet="Cliente" />
-            <End Role="OrdemDeServico" EntitySet="OrdemDeServico" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ordem_servico_executado" Association="Self.FK_ordem_servico_executado">
-            <End Role="Servico" EntitySet="Servico" />
-            <End Role="OrdemDeServico" EntitySet="OrdemDeServico" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ordem_servico_executor" Association="Self.FK_ordem_servico_executor">
-            <End Role="Usuario" EntitySet="Usuario" />
-            <End Role="OrdemDeServico" EntitySet="OrdemDeServico" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ordem_servico_solicitado" Association="Self.FK_ordem_servico_solicitado">
-            <End Role="Servico" EntitySet="Servico" />
-            <End Role="OrdemDeServico" EntitySet="OrdemDeServico" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ordem_servico_solicitante" Association="Self.FK_ordem_servico_solicitante">
-            <End Role="Usuario" EntitySet="Usuario" />
-            <End Role="OrdemDeServico" EntitySet="OrdemDeServico" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ordem_servico_status" Association="Self.FK_ordem_servico_status">
-            <End Role="Status" EntitySet="Status" />
-            <End Role="OrdemDeServico" EntitySet="OrdemDeServico" />
-          </AssociationSet>
-          <AssociationSet Name="FK_pagamento_ordem_servico" Association="Self.FK_pagamento_ordem_servico">
-            <End Role="OrdemDeServico" EntitySet="OrdemDeServico" />
-            <End Role="Pagamento" EntitySet="Pagamento" />
-          </AssociationSet>
-          <AssociationSet Name="FK_pagamento_tipo" Association="Self.FK_pagamento_tipo">
-            <End Role="TipoPagamento" EntitySet="TipoPagamento" />
-            <End Role="Pagamento" EntitySet="Pagamento" />
-          </AssociationSet>
-          <AssociationSet Name="FK_usuario_cargo" Association="Self.FK_usuario_cargo">
-            <End Role="Cargo" EntitySet="Cargo" />
-            <End Role="Usuario" EntitySet="Usuario" />
-          </AssociationSet>
+          <EntitySet Name="Aeronave" EntityType="Self.Aeronave" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Modelo" EntityType="Self.Modelo" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SanegeoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="SanegeoEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Cargo" EntityType="SanegeoModel.Cargo" />
-          <EntitySet Name="Cliente" EntityType="SanegeoModel.Cliente" />
-          <EntitySet Name="Orcamento" EntityType="SanegeoModel.Orcamento" />
-          <EntitySet Name="OrdemDeServico" EntityType="SanegeoModel.OrdemDeServico" />
-          <EntitySet Name="Pagamento" EntityType="SanegeoModel.Pagamento" />
-          <EntitySet Name="Peca" EntityType="SanegeoModel.Peca" />
-          <EntitySet Name="Servico" EntityType="SanegeoModel.Servico" />
-          <EntitySet Name="Status" EntityType="SanegeoModel.Status" />
-          <EntitySet Name="TipoPagamento" EntityType="SanegeoModel.TipoPagamento" />
-          <EntitySet Name="Usuario" EntityType="SanegeoModel.Usuario" />
-          <AssociationSet Name="FK_usuario_cargo" Association="SanegeoModel.FK_usuario_cargo">
-            <End Role="Cargo" EntitySet="Cargo" />
-            <End Role="Usuario" EntitySet="Usuario" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ordem_servico_cliente" Association="SanegeoModel.FK_ordem_servico_cliente">
-            <End Role="Cliente" EntitySet="Cliente" />
-            <End Role="OrdemDeServico" EntitySet="OrdemDeServico" />
-          </AssociationSet>
-          <AssociationSet Name="FK_orcamento_ordem_servico" Association="SanegeoModel.FK_orcamento_ordem_servico">
-            <End Role="OrdemDeServico" EntitySet="OrdemDeServico" />
-            <End Role="Orcamento" EntitySet="Orcamento" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ordem_servico_executado" Association="SanegeoModel.FK_ordem_servico_executado">
-            <End Role="Servico" EntitySet="Servico" />
-            <End Role="OrdemDeServico" EntitySet="OrdemDeServico" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ordem_servico_executor" Association="SanegeoModel.FK_ordem_servico_executor">
-            <End Role="Usuario" EntitySet="Usuario" />
-            <End Role="OrdemDeServico" EntitySet="OrdemDeServico" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ordem_servico_solicitado" Association="SanegeoModel.FK_ordem_servico_solicitado">
-            <End Role="Servico" EntitySet="Servico" />
-            <End Role="OrdemDeServico" EntitySet="OrdemDeServico" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ordem_servico_solicitante" Association="SanegeoModel.FK_ordem_servico_solicitante">
-            <End Role="Usuario" EntitySet="Usuario" />
-            <End Role="OrdemDeServico" EntitySet="OrdemDeServico" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ordem_servico_status" Association="SanegeoModel.FK_ordem_servico_status">
-            <End Role="Status" EntitySet="Status" />
-            <End Role="OrdemDeServico" EntitySet="OrdemDeServico" />
-          </AssociationSet>
-          <AssociationSet Name="FK_pagamento_ordem_servico" Association="SanegeoModel.FK_pagamento_ordem_servico">
-            <End Role="OrdemDeServico" EntitySet="OrdemDeServico" />
-            <End Role="Pagamento" EntitySet="Pagamento" />
-          </AssociationSet>
-          <AssociationSet Name="FK_pagamento_tipo" Association="SanegeoModel.FK_pagamento_tipo">
-            <End Role="TipoPagamento" EntitySet="TipoPagamento" />
-            <End Role="Pagamento" EntitySet="Pagamento" />
-          </AssociationSet>
+          <EntitySet Name="Aeronaves" EntityType="SanegeoModel.Aeronave" />
+          <EntitySet Name="Modeloes" EntityType="SanegeoModel.Modelo" />
         </EntityContainer>
-        <EntityType Name="Cargo">
+        <EntityType Name="Aeronave">
           <Key>
-            <PropertyRef Name="id" />
+            <PropertyRef Name="ID" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="descricao" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Usuario" Relationship="SanegeoModel.FK_usuario_cargo" FromRole="Cargo" ToRole="Usuario" />
+          <Property Name="PREFIX" Type="String" Nullable="false" MaxLength="6" FixedLength="true" Unicode="true" />
+          <Property Name="MAX_DEPARTURE_WEIGHT" Type="Decimal" Nullable="false" Precision="3" Scale="0" />
+          <Property Name="MAX_LANDING_WEIGHT" Type="Decimal" Nullable="false" Precision="3" Scale="0" />
+          <Property Name="ACTIVE" Type="Boolean" Nullable="false" />
+          <Property Name="AIRCRAFT_MODEL" Type="String" MaxLength="4" FixedLength="true" Unicode="true" />
+          <Property Name="PASSENGERS_COUNT_AIRCRAFT" Type="Int32" />
+          <Property Name="ID" Type="Int32" Nullable="false" />
         </EntityType>
-        <EntityType Name="Cliente">
+        <EntityType Name="Modelo">
           <Key>
-            <PropertyRef Name="id" />
+            <PropertyRef Name="ID" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
-          <Property Name="nome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="cpf" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="telefone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="OrdemDeServico" Relationship="SanegeoModel.FK_ordem_servico_cliente" FromRole="Cliente" ToRole="OrdemDeServico" />
+          <Property Name="CODE" Type="String" Nullable="false" MaxLength="4" FixedLength="true" Unicode="true" />
+          <Property Name="ALTERNATIVE_CODE" Type="String" MaxLength="4" FixedLength="true" Unicode="true" />
+          <Property Name="MAX_DEPARTURE_WEIGHT" Type="Decimal" Nullable="false" Precision="3" Scale="0" />
+          <Property Name="MAX_LANDING_WEIGHT" Type="Decimal" Precision="3" Scale="0" />
+          <Property Name="ID" Type="Int32" Nullable="false" />
         </EntityType>
-        <EntityType Name="Orcamento">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="idOrdemServico" Type="Int32" Nullable="false" />
-          <Property Name="valor" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="descricao" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="OrdemDeServico" Relationship="SanegeoModel.FK_orcamento_ordem_servico" FromRole="Orcamento" ToRole="OrdemDeServico" />
-        </EntityType>
-        <EntityType Name="OrdemDeServico">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="idCliente" Type="Int32" Nullable="false" />
-          <Property Name="idServicoSolicitado" Type="Int32" Nullable="false" />
-          <Property Name="idServicoExecutado" Type="Int32" Nullable="false" />
-          <Property Name="idStatus" Type="Int32" Nullable="false" />
-          <Property Name="dataInicio" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="dataFim" Type="DateTime" Precision="0" />
-          <Property Name="idSolicitante" Type="Int32" Nullable="false" />
-          <Property Name="idExecutor" Type="Int32" />
-          <NavigationProperty Name="Cliente" Relationship="SanegeoModel.FK_ordem_servico_cliente" FromRole="OrdemDeServico" ToRole="Cliente" />
-          <NavigationProperty Name="Orcamento" Relationship="SanegeoModel.FK_orcamento_ordem_servico" FromRole="OrdemDeServico" ToRole="Orcamento" />
-          <NavigationProperty Name="Servico" Relationship="SanegeoModel.FK_ordem_servico_executado" FromRole="OrdemDeServico" ToRole="Servico" />
-          <NavigationProperty Name="Usuario" Relationship="SanegeoModel.FK_ordem_servico_executor" FromRole="OrdemDeServico" ToRole="Usuario" />
-          <NavigationProperty Name="Servico1" Relationship="SanegeoModel.FK_ordem_servico_solicitado" FromRole="OrdemDeServico" ToRole="Servico" />
-          <NavigationProperty Name="Usuario1" Relationship="SanegeoModel.FK_ordem_servico_solicitante" FromRole="OrdemDeServico" ToRole="Usuario" />
-          <NavigationProperty Name="Status" Relationship="SanegeoModel.FK_ordem_servico_status" FromRole="OrdemDeServico" ToRole="Status" />
-          <NavigationProperty Name="Pagamento" Relationship="SanegeoModel.FK_pagamento_ordem_servico" FromRole="OrdemDeServico" ToRole="Pagamento" />
-        </EntityType>
-        <EntityType Name="Pagamento">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="valor" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="idOrdemServico" Type="Int32" Nullable="false" />
-          <Property Name="idTipoPagamento" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="OrdemDeServico" Relationship="SanegeoModel.FK_pagamento_ordem_servico" FromRole="Pagamento" ToRole="OrdemDeServico" />
-          <NavigationProperty Name="TipoPagamento" Relationship="SanegeoModel.FK_pagamento_tipo" FromRole="Pagamento" ToRole="TipoPagamento" />
-        </EntityType>
-        <EntityType Name="Peca">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
-          <Property Name="descricao" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="Servico">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="descricao" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="OrdemDeServico" Relationship="SanegeoModel.FK_ordem_servico_executado" FromRole="Servico" ToRole="OrdemDeServico" />
-          <NavigationProperty Name="OrdemDeServico1" Relationship="SanegeoModel.FK_ordem_servico_solicitado" FromRole="Servico" ToRole="OrdemDeServico" />
-        </EntityType>
-        <EntityType Name="Status">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="descricao" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="OrdemDeServico" Relationship="SanegeoModel.FK_ordem_servico_status" FromRole="Status" ToRole="OrdemDeServico" />
-        </EntityType>
-        <EntityType Name="TipoPagamento">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="descricao" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Pagamento" Relationship="SanegeoModel.FK_pagamento_tipo" FromRole="TipoPagamento" ToRole="Pagamento" />
-        </EntityType>
-        <EntityType Name="Usuario">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="nome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="cpf" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="senha" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="idCargo" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Cargo" Relationship="SanegeoModel.FK_usuario_cargo" FromRole="Usuario" ToRole="Cargo" />
-          <NavigationProperty Name="OrdemDeServico" Relationship="SanegeoModel.FK_ordem_servico_executor" FromRole="Usuario" ToRole="OrdemDeServico" />
-          <NavigationProperty Name="OrdemDeServico1" Relationship="SanegeoModel.FK_ordem_servico_solicitante" FromRole="Usuario" ToRole="OrdemDeServico" />
-        </EntityType>
-        <Association Name="FK_usuario_cargo">
-          <End Type="SanegeoModel.Cargo" Role="Cargo" Multiplicity="1" />
-          <End Type="SanegeoModel.Usuario" Role="Usuario" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cargo">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Usuario">
-              <PropertyRef Name="idCargo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ordem_servico_cliente">
-          <End Type="SanegeoModel.Cliente" Role="Cliente" Multiplicity="1" />
-          <End Type="SanegeoModel.OrdemDeServico" Role="OrdemDeServico" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cliente">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="OrdemDeServico">
-              <PropertyRef Name="idCliente" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_orcamento_ordem_servico">
-          <End Type="SanegeoModel.OrdemDeServico" Role="OrdemDeServico" Multiplicity="1" />
-          <End Type="SanegeoModel.Orcamento" Role="Orcamento" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="OrdemDeServico">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Orcamento">
-              <PropertyRef Name="idOrdemServico" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ordem_servico_executado">
-          <End Type="SanegeoModel.Servico" Role="Servico" Multiplicity="1" />
-          <End Type="SanegeoModel.OrdemDeServico" Role="OrdemDeServico" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Servico">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="OrdemDeServico">
-              <PropertyRef Name="idServicoExecutado" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ordem_servico_executor">
-          <End Type="SanegeoModel.Usuario" Role="Usuario" Multiplicity="0..1" />
-          <End Type="SanegeoModel.OrdemDeServico" Role="OrdemDeServico" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Usuario">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="OrdemDeServico">
-              <PropertyRef Name="idExecutor" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ordem_servico_solicitado">
-          <End Type="SanegeoModel.Servico" Role="Servico" Multiplicity="1" />
-          <End Type="SanegeoModel.OrdemDeServico" Role="OrdemDeServico" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Servico">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="OrdemDeServico">
-              <PropertyRef Name="idServicoSolicitado" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ordem_servico_solicitante">
-          <End Type="SanegeoModel.Usuario" Role="Usuario" Multiplicity="1" />
-          <End Type="SanegeoModel.OrdemDeServico" Role="OrdemDeServico" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Usuario">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="OrdemDeServico">
-              <PropertyRef Name="idSolicitante" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ordem_servico_status">
-          <End Type="SanegeoModel.Status" Role="Status" Multiplicity="1" />
-          <End Type="SanegeoModel.OrdemDeServico" Role="OrdemDeServico" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Status">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="OrdemDeServico">
-              <PropertyRef Name="idStatus" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_pagamento_ordem_servico">
-          <End Type="SanegeoModel.OrdemDeServico" Role="OrdemDeServico" Multiplicity="1" />
-          <End Type="SanegeoModel.Pagamento" Role="Pagamento" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="OrdemDeServico">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Pagamento">
-              <PropertyRef Name="idOrdemServico" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_pagamento_tipo">
-          <End Type="SanegeoModel.TipoPagamento" Role="TipoPagamento" Multiplicity="1" />
-          <End Type="SanegeoModel.Pagamento" Role="Pagamento" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TipoPagamento">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Pagamento">
-              <PropertyRef Name="idTipoPagamento" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="SanegeoModelStoreContainer" CdmEntityContainer="SanegeoEntities">
-          <EntitySetMapping Name="Cargo">
-            <EntityTypeMapping TypeName="SanegeoModel.Cargo">
-              <MappingFragment StoreEntitySet="Cargo">
-                <ScalarProperty Name="descricao" ColumnName="descricao" />
-                <ScalarProperty Name="id" ColumnName="id" />
+          <EntitySetMapping Name="Aeronaves">
+            <EntityTypeMapping TypeName="SanegeoModel.Aeronave">
+              <MappingFragment StoreEntitySet="Aeronave">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="PASSENGERS_COUNT_AIRCRAFT" ColumnName="PASSENGERS_COUNT_AIRCRAFT" />
+                <ScalarProperty Name="AIRCRAFT_MODEL" ColumnName="AIRCRAFT_MODEL" />
+                <ScalarProperty Name="ACTIVE" ColumnName="ACTIVE" />
+                <ScalarProperty Name="MAX_LANDING_WEIGHT" ColumnName="MAX_LANDING_WEIGHT" />
+                <ScalarProperty Name="MAX_DEPARTURE_WEIGHT" ColumnName="MAX_DEPARTURE_WEIGHT" />
+                <ScalarProperty Name="PREFIX" ColumnName="PREFIX" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Cliente">
-            <EntityTypeMapping TypeName="SanegeoModel.Cliente">
-              <MappingFragment StoreEntitySet="Cliente">
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="telefone" ColumnName="telefone" />
-                <ScalarProperty Name="cpf" ColumnName="cpf" />
-                <ScalarProperty Name="nome" ColumnName="nome" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Orcamento">
-            <EntityTypeMapping TypeName="SanegeoModel.Orcamento">
-              <MappingFragment StoreEntitySet="Orcamento">
-                <ScalarProperty Name="descricao" ColumnName="descricao" />
-                <ScalarProperty Name="valor" ColumnName="valor" />
-                <ScalarProperty Name="idOrdemServico" ColumnName="idOrdemServico" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="OrdemDeServico">
-            <EntityTypeMapping TypeName="SanegeoModel.OrdemDeServico">
-              <MappingFragment StoreEntitySet="OrdemDeServico">
-                <ScalarProperty Name="idExecutor" ColumnName="idExecutor" />
-                <ScalarProperty Name="idSolicitante" ColumnName="idSolicitante" />
-                <ScalarProperty Name="dataFim" ColumnName="dataFim" />
-                <ScalarProperty Name="dataInicio" ColumnName="dataInicio" />
-                <ScalarProperty Name="idStatus" ColumnName="idStatus" />
-                <ScalarProperty Name="idServicoExecutado" ColumnName="idServicoExecutado" />
-                <ScalarProperty Name="idServicoSolicitado" ColumnName="idServicoSolicitado" />
-                <ScalarProperty Name="idCliente" ColumnName="idCliente" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Pagamento">
-            <EntityTypeMapping TypeName="SanegeoModel.Pagamento">
-              <MappingFragment StoreEntitySet="Pagamento">
-                <ScalarProperty Name="idTipoPagamento" ColumnName="idTipoPagamento" />
-                <ScalarProperty Name="idOrdemServico" ColumnName="idOrdemServico" />
-                <ScalarProperty Name="valor" ColumnName="valor" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Peca">
-            <EntityTypeMapping TypeName="SanegeoModel.Peca">
-              <MappingFragment StoreEntitySet="Peca">
-                <ScalarProperty Name="descricao" ColumnName="descricao" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Servico">
-            <EntityTypeMapping TypeName="SanegeoModel.Servico">
-              <MappingFragment StoreEntitySet="Servico">
-                <ScalarProperty Name="descricao" ColumnName="descricao" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Status">
-            <EntityTypeMapping TypeName="SanegeoModel.Status">
-              <MappingFragment StoreEntitySet="Status">
-                <ScalarProperty Name="descricao" ColumnName="descricao" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TipoPagamento">
-            <EntityTypeMapping TypeName="SanegeoModel.TipoPagamento">
-              <MappingFragment StoreEntitySet="TipoPagamento">
-                <ScalarProperty Name="descricao" ColumnName="descricao" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Usuario">
-            <EntityTypeMapping TypeName="SanegeoModel.Usuario">
-              <MappingFragment StoreEntitySet="Usuario">
-                <ScalarProperty Name="idCargo" ColumnName="idCargo" />
-                <ScalarProperty Name="senha" ColumnName="senha" />
-                <ScalarProperty Name="cpf" ColumnName="cpf" />
-                <ScalarProperty Name="nome" ColumnName="nome" />
-                <ScalarProperty Name="id" ColumnName="id" />
+          <EntitySetMapping Name="Modeloes">
+            <EntityTypeMapping TypeName="SanegeoModel.Modelo">
+              <MappingFragment StoreEntitySet="Modelo">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="MAX_LANDING_WEIGHT" ColumnName="MAX_LANDING_WEIGHT" />
+                <ScalarProperty Name="MAX_DEPARTURE_WEIGHT" ColumnName="MAX_DEPARTURE_WEIGHT" />
+                <ScalarProperty Name="ALTERNATIVE_CODE" ColumnName="ALTERNATIVE_CODE" />
+                <ScalarProperty Name="CODE" ColumnName="CODE" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -664,7 +105,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
